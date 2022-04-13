@@ -1,12 +1,28 @@
+
+function getInputValue(inputId){
+             const InputField = document.getElementById(inputId);
+            const InputAmountText = InputField.value;
+            const AmountValue= parseFloat(InputAmountText);
+            // clear deposit input
+            InputField.value='';
+            return AmountValue;
+
+}
+
+
+
+
 // *******************event handleler deposit btn*********************
 
 document.getElementById('depositBtn').addEventListener('click',function(){
 // console.log('deposit button clicked');
 // get deposit input
-const depositInput = document.getElementById('depositInput');
-const despositAmountText = depositInput.value;
-const despositAmount= parseFloat(despositAmountText);
+// const depositInput = document.getElementById('depositInput');
+// const despositAmountText = depositInput.value;
+// const despositAmount= parseFloat(despositAmountText);
 // console.log(despositAmount);
+
+const despositAmount = getInputValue('depositInput');    /function call /
 
 // get current deposit
 const depositTotal = document.getElementById('depositamount');
@@ -21,8 +37,8 @@ const previousBlanceTotal=parseFloat(previousBlanceTotalText);
 blanceTotal.innerText= previousBlanceTotal+ despositAmount;
 
 
-// clear deposit input
-depositInput.value='';
+// // clear deposit input
+// depositInput.value='';
 
 
 
@@ -35,9 +51,10 @@ document.getElementById('withdrawBtn').addEventListener('click',function(){
  // console.log('button clicked');
 
 // get withdraw input
-const withdrawInput = document.getElementById('withdraw-total');
-const withdrawInputText= withdrawInput.value;
-const withdrawInputAmount = parseFloat(withdrawInputText);
+// const withdrawInput = document.getElementById('withdraw-total');
+// const withdrawInputText= withdrawInput.value;
+// const withdrawInputAmount = parseFloat(withdrawInputText);
+const withdrawInputAmount = getInputValue('withdraw-total');    /function call/
 // console.log (withdrawInputText);
 
 // get current withdraw
@@ -54,7 +71,7 @@ const previousBlanceTotalText = blanceTotal.innerText;
 const previousBlanceTotal=parseFloat(previousBlanceTotalText);
 blanceTotal.innerText= previousBlanceTotal-withdrawInputAmount;
 
-// clear input value
-withdrawInput.value="";
+// // clear input value
+// withdrawInput.value="";
 
 })
