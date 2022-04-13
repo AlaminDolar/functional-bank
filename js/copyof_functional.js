@@ -1,20 +1,43 @@
+// All comment is hereeee>>>>>>>>>>>>><<<<<<<<<<<
 
 function getInputValue(inputId){
-    const InputField = document.getElementById(inputId);
-   const InputAmountText = InputField.value;
-   const AmountValue= parseFloat(InputAmountText);
-   // clear deposit input
-   InputField.value='';
-   return AmountValue;
+     const InputField = document.getElementById(inputId);
+    const InputAmountText = InputField.value;
+    const AmountValue= parseFloat(InputAmountText);
+    // clear deposit input
+    InputField.value='';
+    return AmountValue;
 
 }
 
 function updateTotalField(totalFieldID,amount){
-     const TotalElement = document.getElementById(totalFieldID);
-     const TotalAmountText = TotalElement.innerText;
-     const TotalAmount = parseFloat(TotalAmountText);
+      const TotalElement = document.getElementById(totalFieldID);
+      const TotalAmountText = TotalElement.innerText;
+      const TotalAmount = parseFloat(TotalAmountText);
 
 TotalElement.innerText=amount + TotalAmount;
+}
+
+function getCurrentBlance(){
+const blanceTotal =document.getElementById('blanceAmount');
+const previousBlanceTotalText = blanceTotal.innerText;
+const previousBlanceTotal=parseFloat(previousBlanceTotalText);
+return previousBlanceTotal;
+}
+
+function updateBlance(depositAmount,isAdd){
+const blanceTotal =document.getElementById('blanceAmount');
+// const previousBlanceTotalText = blanceTotal.innerText;
+// const previousBlanceTotal=parseFloat(previousBlanceTotalText);
+const previousBlanceTotal= getCurrentBlance();
+if (isAdd == true){
+blanceTotal.innerText= previousBlanceTotal+ depositAmount;
+}
+else{
+blanceTotal.innerText= previousBlanceTotal- depositAmount;
+}
+
+
 }
 
 
@@ -32,21 +55,25 @@ document.getElementById('depositBtn').addEventListener('click',function(){
 
 const depositAmount = getInputValue('depositInput');    /function call /
 
+if(depositAmount >0){
+updateTotalField('depositamount',depositAmount);
+updateBlance(depositAmount,true);
+}
 // get an update deposit total
 // const depositTotal = document.getElementById('depositamount');
 // const depositTotalAmountText = depositTotal.innerText;
 // const previousTotalAmount = parseFloat(depositTotalAmountText);
 
 // depositTotal.innerText=despositAmount + previousTotalAmount;
-updateTotalField('depositamount',depositAmount);
+
 
 
 
 // Update blance
-const blanceTotal =document.getElementById('blanceAmount');
-const previousBlanceTotalText = blanceTotal.innerText;
-const previousBlanceTotal=parseFloat(previousBlanceTotalText);
-blanceTotal.innerText= previousBlanceTotal+ depositAmount;
+// const blanceTotal =document.getElementById('blanceAmount');
+// const previousBlanceTotalText = blanceTotal.innerText;
+// const previousBlanceTotal=parseFloat(previousBlanceTotalText);
+// blanceTotal.innerText= previousBlanceTotal+ depositAmount;
 
 
 // // clear deposit input
@@ -67,6 +94,15 @@ document.getElementById('withdrawBtn').addEventListener('click',function(){
 // const withdrawInputText= withdrawInput.value;
 // const withdrawInputAmount = parseFloat(withdrawInputText);
 const withdrawInputAmount = getInputValue('withdraw-total');    /function call/
+const curretblance= getCurrentBlance();
+if (withdrawInputAmount > 0 && withdrawInputAmount < curretblance){
+updateTotalField('withdraw-blance',withdrawInputAmount);
+updateBlance(withdrawInputAmount,false);
+}
+if(withdrawInputAmount > curretblance){
+window.alert("Insuffeiant Blance");
+}
+
 // console.log (withdrawInputText);
 
 // get an update withdraw total
@@ -75,15 +111,14 @@ const withdrawInputAmount = getInputValue('withdraw-total');    /function call/
 // const previoustWithdarwTotal= parseFloat(previoustWithdarwTotalText);
 // withdrawTotal.innerText= previoustWithdarwTotal+ withdrawInputAmount;
 
-updateTotalField('withdraw-blance',withdrawInputAmount);
 
 
 
 // Update blance
-const blanceTotal =document.getElementById('blanceAmount');
-const previousBlanceTotalText = blanceTotal.innerText;
-const previousBlanceTotal=parseFloat(previousBlanceTotalText);
-blanceTotal.innerText= previousBlanceTotal-withdrawInputAmount;
+// const blanceTotal =document.getElementById('blanceAmount');
+// const previousBlanceTotalText = blanceTotal.innerText;
+// const previousBlanceTotal=parseFloat(previousBlanceTotalText);
+// blanceTotal.innerText= previousBlanceTotal-withdrawInputAmount;
 
 // // clear input value
 // withdrawInput.value="";
